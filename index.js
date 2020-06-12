@@ -1,11 +1,11 @@
-var express = require("express");
+var express = require('express');
 var app = express();
 const rp = require('request-promise');
 const $ = require('cheerio');
 const url = 'https://liquipedia.net/';
 var port = 3000;
 
-app.get("/all", (req, res, next) => {
+app.get('/all', (req, res, next) => {
     rp(url)
     .then(function(html){
         var games = [];
@@ -20,7 +20,7 @@ app.get("/all", (req, res, next) => {
   });
 });
 
-app.get("/majorevents", (req, res, next) => {
+app.get('/majorevents', (req, res, next) => {
     rp(url + 'counterstrike/Main_Page')
     .then(function(html){
         
@@ -36,8 +36,23 @@ app.get("/majorevents", (req, res, next) => {
   });
 })
 
+app.get('/allevents', (req, res, next) => {
+    rp(url + 'counterstrike/Main_Page')
+    .then(function(html){
+        var allEvents = [];
+        
+        $('.tournaments-list-name', '.tournaments-list', html).each(function(i, elem){
+            allEvents[i] = $(elem).text().trim();
+        });
+
+        res.json(allEvents);
+    })
+    .catch(function(err){
+  });
+})
+
 
 app.listen(port, () => {
- console.log("Server running on port " + port);
+ console.log('Server running on port ' + port);
 });
 
