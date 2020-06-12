@@ -1,2 +1,4 @@
 # Liquipedia API
-An API that sends data parsed from liquipedia.net 
+An API that returns data scraped from liquipedia.net.
+
+[Documentation](DOCUMENTATION.md)
