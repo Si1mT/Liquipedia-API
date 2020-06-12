@@ -20,8 +20,8 @@ app.get('/all', (req, res, next) => {
   });
 });
 
-app.get('/majorevents', (req, res, next) => {
-    rp(url + 'counterstrike/Main_Page')
+app.get('/:game/majorevents', (req, res, next) => {
+    rp(url + req.params.game + '/Main_Page')
     .then(function(html){
         
         var majorEvents = [];
@@ -36,8 +36,8 @@ app.get('/majorevents', (req, res, next) => {
   });
 })
 
-app.get('/allevents', (req, res, next) => {
-    rp(url + 'counterstrike/Main_Page')
+app.get('/:game/allevents', (req, res, next) => {
+    rp(url + req.params.game + '/Main_Page')
     .then(function(html){
         var allEvents = [];
         
